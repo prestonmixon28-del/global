@@ -51,8 +51,43 @@ class WeightedGraph<T> {
 
             System.out.println();
         }
+
+        public boolean bfs(T start, T end) {
+    int startIndex = vertices.indexOf(start);
+    int endIndex = vertices.indexOf(end);
+
+    if (startIndex == -1 || endIndex == -1) {
+        return false;
     }
-}
+
+    boolean[] visited = new boolean[vertices.size()];
+    java.util.Queue<Integer> queue = new java.util.LinkedList<>();
+
+    queue.add(startIndex);
+    visited[startIndex] = true;
+
+    while (!queue.isEmpty()) {
+        int current = queue.remove();
+
+        if (current == endIndex) {
+            return true;
+        }
+
+        for (int i = 0; i < vertices.size(); i++) {
+            if (matrix[current][i] != -1 && !visited[i]) {
+                visited[i] = true;
+                queue.add(i);
+            }
+        }
+    }
+
+    return false;
+
+
+    }
+    }
+
+
 
 public class Main {
     public static void main(String[] args) {
